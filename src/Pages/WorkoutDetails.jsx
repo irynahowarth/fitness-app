@@ -1,10 +1,12 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import "../server";
+import WorkoutActive from "../components/WorkoutActive";
 
 export default function WorkoutDetails() {
   const params = useParams();
   const [workout, setWorkout] = React.useState(null);
+  const [isActive, setIsActive] = React.useState(false);
 
   React.useEffect(() => {
     fetch(`/api/workouts/${params.id}`)
@@ -40,6 +42,17 @@ export default function WorkoutDetails() {
       <span>Exercises: </span>
       <span>Time: {workout.time}</span>
       <div>{circuits}</div>
+      {isActive ? (
+        <WorkoutActive />
+      ) : (
+        <button
+          onClick={() => {
+            setIsActive(true);
+          }}
+        >
+          Start workout
+        </button>
+      )}
     </div>
   ) : (
     <h2>Loading....</h2>
