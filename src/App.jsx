@@ -6,6 +6,10 @@ import About from "./Pages/About";
 import Workouts from "./Pages/Workouts";
 import WorkoutDetails from "./Pages/WorkoutDetails";
 import Layout from "./components/Layout";
+import AdminLayout from "./components/AdminLayout";
+import Dashboard from "./Pages/Admin/Dashboard";
+import WorkoutsList from "./Pages/Admin/WorkoutsList";
+import WorkoutCreate from "./Pages/Admin/WorkoutCreate";
 
 function App() {
   return (
@@ -16,6 +20,14 @@ function App() {
           <Route path="about" element={<About />} />
           <Route path="workouts" element={<Workouts />} />
           <Route path="workouts/:id" element={<WorkoutDetails />} />
+        </Route>
+        <Route path="admin" element={<AdminLayout />}>
+          <Route index element={<Dashboard />} />
+          <Route path="workouts">
+            <Route index element={<WorkoutsList />} />
+            <Route path="create" element={<WorkoutCreate />} />
+            <Route path="edit/:id" element={<h1>Make changes to workout</h1>} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
