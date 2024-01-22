@@ -6,7 +6,9 @@ function reducer(circuits, action) {
     switch (action.type) {
       case "create-circuit": {
         draftState.push({
-          name: action.name,
+          name: action.circuit.name,
+          time: action.circuit.time,
+          exercises: action.circuit.exercises,
           id: action.id,
         });
         break;
@@ -22,10 +24,10 @@ export default function About() {
   const [workout, setWorkout] = React.useState({});
   const [circuits, dispatch] = React.useReducer(reducer, []);
 
-  function handleCreateCircuit(name) {
+  function handleCreateCircuit(circuit) {
     dispatch({
       type: "create-circuit",
-      name,
+      circuit,
       id: crypto.randomUUID(),
     });
   }
@@ -63,9 +65,14 @@ export default function About() {
 function CircuitList({ cicuits, handleDeleteCircuit }) {
   return (
     <ul>
-      {cicuits.map(({ id, name }) => (
+      {cicuits.map(({ id, name, time, exercises }) => (
         <li key={id}>
-          {name}
+          {name} - {time}
+          <ul>
+            {exercises?.map((item, index) => (
+              <li key={index}>{item.name}</li>
+            ))}
+          </ul>
           <button onClick={() => handleDeleteCircuit(id)}>X</button>
         </li>
       ))}
@@ -74,27 +81,64 @@ function CircuitList({ cicuits, handleDeleteCircuit }) {
 }
 
 function CreateNewCircuit({ handleCreateCircuit }) {
-  const [value, setValue] = React.useState("");
+  const [value, setValue] = React.useState({
+    name: "",
+    time: "",
+    exercises: [
+      {
+        name: "Bend leg jackknife",
+        reps: 20,
+      },
+      {
+        name: "Straight leg jackknife",
+        reps: 20,
+      },
+    ],
+  });
   return (
     <div>
       <form
         onSubmit={(event) => {
           event.preventDefault();
           handleCreateCircuit(value);
-          setValue("");
+          setValue({
+            name: "",
+            time: "",
+            exercises: [
+              {
+                name: "Bend leg jackknife",
+                reps: 20,
+              },
+              {
+                name: "Straight leg jackknife",
+                reps: 20,
+              },
+            ],
+          });
         }}
       >
-        <label htmlFor="">Circuit Name</label>
+        <label htmlFor="new-circuit-name">Circuit Name</label>
         <div>
           <input
             type="text"
             className="border"
-            value={value}
+            value={value.name}
+            id="new-circuit-name"
             onChange={(event) => {
-              setValue(event.target.value);
+              setValue({ ...value, name: event.target.value });
             }}
           />
-          <button>Add</button>
+          <label htmlFor="new-circuit-time">Circuit Time</label>
+          <input
+            id="new-circuit-time"
+            type="text"
+            className="border"
+            value={value.time}
+            onChange={(event) => {
+              setValue({ ...value, time: event.target.value });
+            }}
+          />
+          <button type="submit">Add</button>
         </div>
       </form>
     </div>
