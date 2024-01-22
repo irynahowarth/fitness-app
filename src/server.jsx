@@ -19,6 +19,12 @@ createServer({
       const id = request.params.id;
       return schema.workouts.find(id);
     });
+
+    this.post("/workouts", (schema, request) => {
+      let attrs = JSON.parse(request.requestBody);
+      console.log(attrs);
+      return schema.workouts.create(attrs);
+    });
   },
   seeds(server) {
     server.create("workout", {
@@ -115,6 +121,11 @@ createServer({
         },
       ],
       time: "28-35 Mins",
+    });
+    server.create("workout", {
+      id: 5,
+      name: "Begginer Plank",
+      circuits: [],
     });
     server.create("workout", {
       id: 2,

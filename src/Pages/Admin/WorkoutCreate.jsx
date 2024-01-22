@@ -23,7 +23,11 @@ function reducer(circuits, action) {
 }
 
 export default function WorkoutCreate() {
-  const [workout, setWorkout] = React.useState({});
+  const [workout, setWorkout] = React.useState({
+    name: "",
+    circuits: [],
+    time: "",
+  });
   const [circuits, dispatch] = React.useReducer(reducer, []);
 
   function handleCreateCircuit(circuit) {
@@ -41,6 +45,34 @@ export default function WorkoutCreate() {
     });
   }
 
+  function handleSubmit(event) {
+    event.preventDefault();
+    addWorkout(workout);
+  }
+
+  const addWorkout = async ({ name, circuits, time }) => {
+    if (!name) {
+      console.log("Workout needs to have a name");
+      return;
+    }
+    await fetch("/api/workouts", {
+      method: "POST",
+      body: JSON.stringify({
+        name: name,
+        circuits: circuits,
+        time: time,
+      }),
+    })
+      .then((res) => {
+        console.log(res.json());
+        setWorkout({ name: "", circuits: [], time: "" });
+        console.log("Workout added successfully");
+      })
+      .catch((error) => {
+        console.log("Error adding workout.", error);
+      });
+  };
+
   return (
     <>
       <h1 className="text-4xl font-bold">Create new workout</h1>
@@ -51,13 +83,30 @@ export default function WorkoutCreate() {
           id="workout-name"
           autoComplete="off"
           className="border"
+          value={workout.name}
+          onChange={(event) =>
+            setWorkout({ ...workout, name: event.target.value })
+          }
         />
-        <button type="button">Add Workout</button>
+        <label htmlFor="workout-time">Workout time:</label>
+        <input
+          type="text"
+          id="workout-time"
+          autoComplete="off"
+          className="border"
+          value={workout.time}
+          onChange={(event) =>
+            setWorkout({ ...workout, time: event.target.value })
+          }
+        />
         <CircuitList
           cicuits={circuits}
           handleDeleteCircuit={handleDeleteCircuit}
         />
         <CreateNewCircuit handleCreateCircuit={handleCreateCircuit} />
+        <button type="button" onClick={handleSubmit}>
+          Save
+        </button>
       </div>
     </>
   );
