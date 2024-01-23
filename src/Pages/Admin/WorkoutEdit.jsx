@@ -91,7 +91,11 @@ export default function WorkoutEdit() {
             className="rounded-md bg-indigo-700 px-6 py-3 text-sm font-semibold text-white shadow-sm "
           />
         </section>
-        <input type="submit" value="Submit" />
+        <input
+          type="submit"
+          value="Save"
+          className="block rounded-md bg-indigo-700 mt-4 ml-auto px-6 py-3 text-sm font-semibold text-white shadow-sm "
+        />
       </form>
     </div>
   );

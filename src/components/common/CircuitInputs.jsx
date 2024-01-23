@@ -7,8 +7,9 @@ export default function CircuitInputs({
   handleCircuitChange,
   delCircuit,
 }) {
-  const circuitId = `name-${idx}`;
-  const circuitTimeId = `time-${idx}`;
+  const rndId = Math.floor(Math.random() * 1000);
+  const circuitId = `circuit-name-${idx}`;
+  const circuitTimeId = `circuit-time-${idx}`;
   const blankExercise = { name: "", time: "" };
   const [exercise, setExercise] = React.useState([]);
 
@@ -79,6 +80,18 @@ export default function CircuitInputs({
           className="absolute top-0 right-0 cursor-pointer py-3 px-4 text-md font-base text-gray-400 hover:text-gray-700"
         />
       </div>
+      {exercise.map((val, idx) => {
+        return (
+          <ExcerciseInputs
+            key={idx}
+            idx={idx}
+            parentId={rndId}
+            exercise={exercise}
+            handleExerciseChange={handleExerciseChange}
+            delExercise={delExercise}
+          />
+        );
+      })}
       <input
         type="button"
         onClick={() => addExercise()}
@@ -86,17 +99,6 @@ export default function CircuitInputs({
         data-idx={idx}
         className="rounded-md border px-6 py-3 text-sm font-semibold shadow-sm "
       />
-      {exercise.map((val, idx) => {
-        return (
-          <ExcerciseInputs
-            key={idx}
-            idx={idx}
-            exercise={exercise}
-            handleExerciseChange={handleExerciseChange}
-            delExercise={delExercise}
-          />
-        );
-      })}
     </section>
   );
 }
