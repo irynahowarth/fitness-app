@@ -11,7 +11,9 @@ export default function AdminLayout() {
         <NavLink to="/admin/workouts">All Workouts</NavLink>
         <NavLink to="/admin/exercises">All Exercises</NavLink>
       </nav>
-      <Outlet />
+      <div className="mx-10 my-4">
+        <Outlet />
+      </div>
     </>
   );
 }

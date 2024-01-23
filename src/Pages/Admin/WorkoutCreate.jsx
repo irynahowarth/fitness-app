@@ -75,36 +75,62 @@ export default function WorkoutCreate() {
 
   return (
     <>
-      <h1 className="text-4xl font-bold">Create new workout</h1>
-      <div>
-        <label htmlFor="workout-name">Workout name:</label>
+      <h1 className="text-3xl font-bold tracking-tight text-gray-900 mb-8">
+        Create Workout
+      </h1>
+      <div className="flex flex-col">
+        <label
+          htmlFor="workout-name"
+          className="block text-md font-medium leading-6 text-gray-900"
+        >
+          Workout Name
+        </label>
         <input
           type="text"
           id="workout-name"
           autoComplete="off"
-          className="border"
+          className="border py-2 px-4 rounded mb-6"
           value={workout.name}
           onChange={(event) =>
             setWorkout({ ...workout, name: event.target.value })
           }
         />
-        <label htmlFor="workout-time">Workout time:</label>
+        <label
+          htmlFor="workout-time"
+          className="block text-md font-medium leading-6 text-gray-900"
+        >
+          Workout Time
+        </label>
         <input
           type="text"
           id="workout-time"
           autoComplete="off"
-          className="border"
+          className="border py-2 px-4 rounded mb-6  "
           value={workout.time}
           onChange={(event) =>
             setWorkout({ ...workout, time: event.target.value })
           }
         />
+      </div>
+      <div>
+        <button
+          type="button"
+          className="rounded-md bg-indigo-700 px-6 py-3 text-sm font-semibold text-white shadow-sm "
+        >
+          + New Circuit
+        </button>
+      </div>
+      <div>
         <CircuitList
           cicuits={circuits}
           handleDeleteCircuit={handleDeleteCircuit}
         />
         <CreateNewCircuit handleCreateCircuit={handleCreateCircuit} />
-        <button type="button" onClick={handleSubmit}>
+        <button
+          type="button"
+          onClick={handleSubmit}
+          className="rounded-md bg-indigo-700 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-700"
+        >
           Save
         </button>
       </div>
