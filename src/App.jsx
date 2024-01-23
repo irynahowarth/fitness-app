@@ -10,6 +10,7 @@ import AdminLayout from "./components/AdminLayout";
 import Dashboard from "./Pages/Admin/Dashboard";
 import WorkoutsList from "./Pages/Admin/WorkoutsList";
 import WorkoutCreate from "./Pages/Admin/WorkoutCreate";
+import WorkoutEdit from "./Pages/Admin/WorkoutEdit";
 
 function App() {
   return (
@@ -26,7 +27,7 @@ function App() {
           <Route path="workouts">
             <Route index element={<WorkoutsList />} />
             <Route path="create" element={<WorkoutCreate />} />
-            <Route path="edit/:id" element={<h1>Make changes to workout</h1>} />
+            <Route path="edit/:id" element={<WorkoutEdit />} />
           </Route>
         </Route>
       </Routes>
