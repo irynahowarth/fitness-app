@@ -19,7 +19,8 @@ export default function WorkoutEdit() {
 
   const handleCircuitChange = (e) => {
     const updatedCircuit = [...circuit];
-    updatedCircuit[e.target.dataset.idx][e.target.className] = e.target.value;
+    updatedCircuit[e.target.dataset.idx][e.target.dataset.name] =
+      e.target.value;
     setCircuit(updatedCircuit);
   };
 
