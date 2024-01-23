@@ -4,18 +4,25 @@ import ExcerciseInputs from "./ExcerciseInputs";
 export default function CircuitInputs({
   idx,
   circuit,
+  setCircuit,
   handleCircuitChange,
   delCircuit,
 }) {
   const rndId = Math.floor(Math.random() * 1000);
   const circuitId = `circuit-name-${idx}`;
   const circuitTimeId = `circuit-time-${idx}`;
-  const blankExercise = { name: "", time: "" };
   const [exercise, setExercise] = React.useState([]);
+  const blankExercise = { name: "", time: "" };
 
   const addExercise = () => {
     setExercise([...exercise, { ...blankExercise }]);
   };
+
+  React.useEffect(() => {
+    const updatedCircuit = [...circuit];
+    updatedCircuit[idx].exercises = exercise;
+    setCircuit(updatedCircuit);
+  }, [exercise]);
 
   const handleExerciseChange = (e) => {
     const updatedExercise = [...exercise];

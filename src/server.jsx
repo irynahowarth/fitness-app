@@ -329,6 +329,7 @@ createServer({
       ],
       time: "28-35 Mins",
     });
+
     server.create("workout", {
       id: 4,
       name: "Express Legs",
@@ -373,6 +374,101 @@ createServer({
         },
       ],
       time: "12-15 Mins",
+    });
+    server.create("workout", {
+      id: 6,
+      name: "Full Body Bootcamp#1",
+      time: "45 Mins",
+      circuits: [
+        {
+          name: "Warm up",
+          time: "3 mins",
+          exercises: [
+            {
+              name: "Plank",
+              time: "60",
+            },
+            {
+              name: "Jumping Jacks",
+              time: "30",
+            },
+          ],
+        },
+        {
+          name: "Circuit 1",
+          time: "7 mins",
+          exercises: [
+            {
+              name: "Deadlift",
+              time: "30",
+            },
+            {
+              name: "Plank & Turn",
+              time: "30",
+            },
+          ],
+        },
+        {
+          name: "Circuit 2",
+          time: "7 Mins",
+          exercises: [
+            {
+              name: "Superman hold",
+              time: "30",
+            },
+            {
+              name: "Mountain climbers",
+              time: "30",
+            },
+            {
+              name: "Plank & Reach",
+              time: "30",
+            },
+          ],
+        },
+      ],
+    });
+    server.create("workout", {
+      name: "Intense Abs",
+      time: "15-20 minutes",
+      circuits: [
+        {
+          name: "Circuit 1",
+          time: "7 mins",
+          exercises: [
+            {
+              name: "Commando",
+              time: "40",
+            },
+            {
+              name: "Pop squat",
+              time: "20",
+            },
+            {
+              name: "Ab bikes",
+              time: "40",
+            },
+            {
+              name: "Plank",
+              time: "20",
+            },
+          ],
+        },
+        {
+          name: "Circuit 2",
+          time: "7 mins",
+          exercises: [
+            {
+              name: "Butterfly situps",
+              time: "40",
+            },
+            {
+              name: "Jump Lunge",
+              time: "20",
+            },
+          ],
+        },
+      ],
     });
     server.create("exercise", {
       name: "Burpee",
